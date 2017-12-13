@@ -68,8 +68,6 @@ int main()
           target_speed = 30*exp(-abs(cte)*1.5)+5.0;
           pid_throttle.UpdateError(speed-target_speed);
           throttle_value = -pid_throttle.TotalError();
-          //if (throttle_value>0.5)
-          //    throttle_value = 0.5;
 
           // DEBUG
           std::cout << "Speed: "<< speed << "TargetSpeed: "<< target_speed  << " CTE: " << cte << " Steering Value: " << steer_value
