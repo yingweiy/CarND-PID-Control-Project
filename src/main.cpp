@@ -34,6 +34,9 @@ int main()
 
   PID pid_steer, pid_throttle;
   // TODO: Initialize the pid variable.
+  // P component: control how quickly the car can adapt to turns
+  // I component: related to correct the alignment error
+  // D component: make the control stable
   pid_steer = PID();
   pid_steer.Init(0.16, 0.0001, 3.0);
   pid_throttle.Init(0.2, 0.0001, 0.3);
