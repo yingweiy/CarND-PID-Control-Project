@@ -3,19 +3,27 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
-## PID Controller
+## PID Controllers
 
 ### Steering PID Controller
 
-* P component: control how quickly the car can adapt to turns
-* I component: related to correct the alignment error
-* D component: make the control stable
-  
-  For the steering controller: P = 0.16, I = 0.0001, D = 3.0. These parameters are set empirically.
+* P component: control how quickly the car can adapt to turns. Too small this value, the car is less adaptive, and became hard to 
+take turns. Too large this value, the car is more stable, but appears too stiff. Empirically, with many round manual tests, 
+I set this value to 0.16.  
+* I component: related to correct the alignment error. I started with a quite small value, 0.0001, and observe that the care does 
+not displays an alignment-type error. Hence I keep this value as is.
+* D component: make the control stable. This value is more correlate with the P component. I set this value manually through 
+many experiments. The larger the value can make the vehicle stablized and reduce the side effect of larger P component. 
+Once I set the P component 0.16, I make the P component fixed, and search for the D value. Finally I set it to be 3.0, which
+yeilds my current best results.
+    
+In summary, for the steering controller: P = 0.16, I = 0.0001, D = 3.0. These parameters are set empirically.
 
 ### Throttle Controller  
 
-Throttle PID controller is set to P=0.2, I = 0.0001, D=0.3. 
+Throttle PID controller is set to P=0.2, I = 0.0001, D=0.3. The value choice is similiar to the steering PID controller. 
+They are obtained through manual experiments. I intentionally set the I component small, since no alignment errors observed,
+and I used a P and D components values close to my steering values. The initial trial P=0.2, D=0.3 works well. 
 
 For throttle controller, I did a trick to control the target speed based on the CTE. The target speed for throttle 
 controller is shown below:
@@ -29,7 +37,7 @@ The the speed is set to the current target_speed:
 pid_throttle.UpdateError(speed-target_speed);
 ```
 
-It behaves slowing down at turns.
+It behaves slowing down at turns. I found this is very useful to keep the car drive safe.
 
 ### Video Clip
 
